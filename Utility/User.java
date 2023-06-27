@@ -1,8 +1,6 @@
 package Utility;
 
 import java.io.Serializable;
-import java. time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class User implements Serializable{
     private String userName;
@@ -33,41 +31,35 @@ public class User implements Serializable{
         this.bio=null;
         this.location=null;
         this.webSiteAddress=null;
-        this.signUpDate=getCurrentTime();
-        this.lastModified=getCurrentTime();
+        this.signUpDate=Time.getCurrentTime();
+        this.lastModified=Time.getCurrentTime();
         this.avatarLocation=null;
         this.headerLocation=null;
     }
 
     public void setBio(String bio){
         this.bio=bio;
-        setLastModified(getCurrentTime());
+        setLastModified(Time.getCurrentTime());
     }
 
     public void setLocation(String location){
         this.location=location;
-        setLastModified(getCurrentTime());
+        setLastModified(Time.getCurrentTime());
     }
 
     public void setWebSiteAddress(String webSiteAddress){
         this.webSiteAddress=webSiteAddress;
-        setLastModified(getCurrentTime());
+        setLastModified(Time.getCurrentTime());
     }
 
     public void setAvatar(String avatarLocation){
         this.avatarLocation=avatarLocation;
-        setLastModified(getCurrentTime());
+        setLastModified(Time.getCurrentTime());
     }
     
     public void setHeader(String headerLocation){
         this.headerLocation=headerLocation;
-        setLastModified(getCurrentTime());
-    }
-
-    public String getCurrentTime(){
-        LocalDateTime current = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return current.format(formatter);
+        setLastModified(Time.getCurrentTime());
     }
 
     public void setLastModified(String currentTime){
