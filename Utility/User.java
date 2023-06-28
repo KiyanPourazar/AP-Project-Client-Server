@@ -62,6 +62,10 @@ public class User implements Serializable{
         setLastModified(Time.getCurrentTime());
     }
 
+    public void setSignUpDate(String date){
+        signUpDate=date;
+    }
+
     public void setLastModified(String currentTime){
         lastModified=currentTime;
     }

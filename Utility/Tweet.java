@@ -2,6 +2,7 @@ package Utility;
 
 import java.io.Serializable;
 // import java.util.ArrayList;
+import java.util.Objects;
 
 public class Tweet implements Serializable{
     private int likesCount;
@@ -10,18 +11,47 @@ public class Tweet implements Serializable{
     private String tweetDate;
     private String hashTag;
     private String message;
+    private String userName;
     // private ArrayList<String> imagesLocation;
     private int id;
+    private boolean isFavstar;
 
-    public Tweet(int id, String message, String hashTag, int likesCount, int reTweetsCount, int commentsCount) {
-        this.id=id;
+    public Tweet(String userName, String message, String hashTag) {
+        this.userName=userName;
         this.message=message;
         this.tweetDate = Time.getCurrentTime();
         this.hashTag = hashTag;
-        this.likesCount = likesCount;
-        this.reTweetsCount = reTweetsCount;
-        this.commentsCount = commentsCount;
+        this.likesCount = 0;
+        this.reTweetsCount = 0;
+        this.commentsCount = 0;
+        setId(hashCode());
+        isFavstar=false;
         // TODO: Add support for images
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, likesCount, reTweetsCount, commentsCount, tweetDate, hashTag, message);
+    }
+
+    public void setTweetDate(String date){
+        tweetDate=date;
+    }
+
+    public void setId(int id){
+        this.id=id;
+    }
+
+    public void setFavstar(boolean state){
+        isFavstar=state;
+    }
+
+    public boolean getFavstar(){
+        return isFavstar;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public void addLike() {
@@ -52,12 +82,24 @@ public class Tweet implements Serializable{
         return likesCount;
     }
 
+    public void setLikesCount(int count){
+        likesCount=count;
+    }
+
     public int getReTweetsCount() {
         return reTweetsCount;
     }
 
+    public void setReTweetsCount(int count) {
+        reTweetsCount=count;
+    }
+
     public int getCommentsCount() {
         return commentsCount;
+    }
+
+    public void setCommentsCount(int count){
+        commentsCount=count;
     }
 
     public String getTweetDate() {
@@ -72,7 +114,7 @@ public class Tweet implements Serializable{
         return message;
     }
 
-    public int getId() {
-        return id;
+    public String getUserName(){
+        return userName;
     }
 }
