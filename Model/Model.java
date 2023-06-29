@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// TODO: timeline
 // TODO: each user has a folder containing profile and tweet images and maybe timeline FX
 // TODO: special display for replies/quotes/retweets(maybe a tweet "kind" in database) FX
+// TODO: do sth about all the select *
 public class Model{
     public static void main(String[] args){
         // Model model=new Model();
@@ -18,17 +18,21 @@ public class Model{
         // User user2=new User("mahKam1", null, "IR", null, "123", null, null, null);
         // Tweet tweet=new Tweet("mahKam", "hello", "greet");
         // Tweet tweet2=new Tweet("mahKam", "bye", "greet");
+        // Tweet tweet3=new Tweet("mahKam1", "bye bye", "greet");
+        // model.addUser(user);
+        // model.addUser(user2);
         // model.addTweet(tweet); 
         // model.addTweet(tweet2);
-        // // model.addUser(user);
-        // // model.addUser(user2);
+        // model.addTweet(tweet3);
         // // model.follow("mahKam1", "mahKam");
         // // model.follow("mahKam", "mahKam1");
-        // // model.block("mahKam1", "mahKam");
+        // model.block("mahKam", "mahKam1");
         // for(int i=1; i<=10; i++){
-        //     model.like("mahKam", tweet.getId());
+        //     model.like("mahKam", tweet3.getId());
         // }
-        // model.unLike("mahKam1", tweet.getId());
+        // // model.unLike("mahKam1", tweet.getId());
+        // Tweet[] tweets=model.timeLine("mahKam");
+        // return;
     }
 
     public Connection getConnection(){
@@ -482,26 +486,34 @@ public class Model{
         }
     }
 
-    // public Tweet[] timeLine(String userName){
-    //     try(Connection conn=getConnection();){
-    //         String sql="select * from tweets "
-    //         + "where hashTag=?";
-    //         PreparedStatement preparedStatement=conn.prepareStatement(sql);
-    //         preparedStatement.setString(1, hashTag);
-    //         ResultSet resultSet=preparedStatement.executeQuery();
-    //         Tweet[] tweets=new Tweet[10];
-    //         int counter=0;
-    //         while(resultSet.next() && counter<10){
-    //             tweets[counter]=getTweet(resultSet.getInt("id"));
-    //             counter++;
-    //         }
-    //         return tweets;
-    //     }
-    //     catch(SQLException sqle){
-    //         System.out.println(sqle.getMessage());
-    //         return null;
-    //     }
-    // }
+    public Tweet[] timeLine(String userName){
+        try(Connection conn=getConnection();){
+            String sql="select t.id, t.userName from tweets t "
+            + "where not exists(select * from blocks b "
+            + "where b.blocker=? and b.blocked=t.userName "
+            + "or b.blocker=t.userName and b.blocked=?) "
+            + "and isFavstar=1 "
+            + "or exists(select * from follows f "
+            + "where f.follower=? and f.followed=t.userName) "
+            + "group by t.id;";
+            PreparedStatement preparedStatement=conn.prepareStatement(sql);
+            for(int i=1; i<=3; i++){
+                preparedStatement.setString(i, userName);
+            }
+            ResultSet resultSet=preparedStatement.executeQuery();
+            Tweet[] tweets=new Tweet[10];
+            int counter=0;
+            while(resultSet.next() && counter<10){
+                tweets[counter]=getTweet(resultSet.getInt("t.id"));
+                counter++;
+            }
+            return tweets;
+        }
+        catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+            return null;
+        }
+    }
 }
 /*  userName
     phoneNumber
@@ -526,4 +538,5 @@ public class Model{
     hashTag
     likesCount
     reTweetsCount
-    commentsCount */
+    commentsCount
+    isFavstar */
