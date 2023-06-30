@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="493.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/20.0.1">
+<GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -39,7 +39,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Button fx:id="signUpButton" layoutX="82.0" layoutY="41.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="329.0" style="-fx-background-color: #ffffffff;" text="not a member? sign up now" textFill="RED" />
+            <Button fx:id="signUpButton" layoutX="82.0" layoutY="41.0" mnemonicParsing="false" onAction="#signUp" prefHeight="26.0" prefWidth="329.0" style="-fx-background-color: #ffffffff;" text="not a member? sign up now" textFill="RED" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -48,11 +48,6 @@
             <Text fill="#08a0e9" layoutX="102.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="182.4228057861328">
                <font>
                   <Font size="19.0" />
-               </font>
-            </Text>
-            <Text fx:id="wrongLogIn" fill="RED" layoutX="120.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username or password is incorrect!" wrappingWidth="253.0">
-               <font>
-                  <Font size="15.0" />
                </font>
             </Text>
          </children>

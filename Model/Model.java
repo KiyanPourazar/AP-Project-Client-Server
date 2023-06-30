@@ -8,32 +8,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// TODO: each user has a folder containing profile and tweet images and maybe timeline FX
+// TODO: each user has a folder containing profile and tweet images FX
 // TODO: special display for replies/quotes/retweets(maybe a tweet "kind" in database) FX
 // TODO: do sth about all the select *
 public class Model{
-    public static void main(String[] args){
-        // Model model=new Model();
-        // User user=new User("mahKam", null, "IR", null, "123", null, null, null);
-        // User user2=new User("mahKam1", null, "IR", null, "123", null, null, null);
-        // Tweet tweet=new Tweet("mahKam", "hello", "greet");
-        // Tweet tweet2=new Tweet("mahKam", "bye", "greet");
-        // Tweet tweet3=new Tweet("mahKam1", "bye bye", "greet");
-        // model.addUser(user);
-        // model.addUser(user2);
-        // model.addTweet(tweet); 
-        // model.addTweet(tweet2);
-        // model.addTweet(tweet3);
-        // // model.follow("mahKam1", "mahKam");
-        // // model.follow("mahKam", "mahKam1");
-        // model.block("mahKam", "mahKam1");
-        // for(int i=1; i<=10; i++){
-        //     model.like("mahKam", tweet3.getId());
-        // }
-        // // model.unLike("mahKam1", tweet.getId());
-        // Tweet[] tweets=model.timeLine("mahKam");
-        // return;
-    }
+    // public static void main(String[] args){
+    //     // Model model=new Model();
+    //     // User user=new User("mahKam", null, "IR", null, "123", null, null, null);
+    //     // User user2=new User("mahKam1", null, "IR", null, "123", null, null, null);
+    //     // Tweet tweet=new Tweet("mahKam", "hello", "greet");
+    //     // Tweet tweet2=new Tweet("mahKam", "bye", "greet");
+    //     // Tweet tweet3=new Tweet("mahKam1", "bye bye", "greet");
+    //     // model.addUser(user);
+    //     // model.addUser(user2);
+    //     // model.addTweet(tweet); 
+    //     // model.addTweet(tweet2);
+    //     // model.addTweet(tweet3);
+    //     // // model.follow("mahKam1", "mahKam");
+    //     // // model.follow("mahKam", "mahKam1");
+    //     // model.block("mahKam", "mahKam1");
+    //     // for(int i=1; i<=10; i++){
+    //     //     model.like("mahKam", tweet3.getId());
+    //     // }
+    //     // // model.unLike("mahKam1", tweet.getId());
+    //     // Tweet[] tweets=model.timeLine("mahKam");
+    //     // return;
+    // }
 
     public Connection getConnection(){
         try{
@@ -104,10 +104,6 @@ public class Model{
             System.out.println(sqle.getMessage());
             return "failure";
         }
-    }
-
-    public void checkAddUser(){
-        // TODO: Check add data
     }
     
     public String addUser(User user){
@@ -266,10 +262,6 @@ public class Model{
             System.out.println(sqle.getMessage());
             return null;
         }
-    }
-
-    public void checkAddTweet(){
-        // TODO: Special tweet add conditions
     }
 
     public Tweet getTweet(int tweetId){
@@ -492,9 +484,9 @@ public class Model{
             + "where not exists(select * from blocks b "
             + "where b.blocker=? and b.blocked=t.userName "
             + "or b.blocker=t.userName and b.blocked=?) "
-            + "and isFavstar=1 "
+            + "and (isFavstar=1 "
             + "or exists(select * from follows f "
-            + "where f.follower=? and f.followed=t.userName) "
+            + "where f.follower=? and f.followed=t.userName)) "
             + "group by t.id;";
             PreparedStatement preparedStatement=conn.prepareStatement(sql);
             for(int i=1; i<=3; i++){
