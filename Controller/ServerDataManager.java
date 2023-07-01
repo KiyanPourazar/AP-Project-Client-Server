@@ -10,9 +10,8 @@ public class ServerDataManager {
         Object object=dataObject.getObject();
         if(method.equals("sign-up")){
             return signUp((User)object);
-        } else if(method.equals("sign-in")){
-            // return signIn((String)object);
-            return null;
+        } else if(method.equals("login")){
+            return logIn((String)object);
         } else{
             return null;
         }
@@ -23,18 +22,9 @@ public class ServerDataManager {
         return new DataObject(result, null);
     }
 
-    // public static synchronized DataObject signIn(String info){
-    //     String[] inf=info.split(" | ");
-    //     for(User user:userCol){
-    //         if(user.getUserName().equals(inf[0])){
-    //             if(user.getPassWord().equals(inf[2])){
-    //                 return new DataObject("success", null);
-    //             } else{
-    //                 return new DataObject("wrong-pass", null);
-    //             }
-                
-    //         }
-    //     }
-    //     return new DataObject("not-found", null);
-    // }
+    public static synchronized DataObject logIn(String info){
+        String[] inf=info.split(" | ");
+        String result=model.login(inf[0], inf[2]);
+        return new DataObject(result, null);
+    }
 }

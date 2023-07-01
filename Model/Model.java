@@ -50,6 +50,17 @@ public class Model{
         }
     }
 
+    public String login(String userName, String passWord){
+        User user=getUser(userName);
+        if(user==null){
+            return "not found";
+        }
+        if(!user.getPassWord().equals(passWord)){
+            return "wrong pass";
+        }
+        return "success";
+    }
+
     public User getUser(String userName){
         try(Connection conn=getConnection();){
             String sql="select * from users "
@@ -71,6 +82,7 @@ public class Model{
             user.setWebSiteAddress(data[10]);
             user.setSignUpDate(data[11]);
             user.setLastModified(data[12]);
+            // TODO: Profile image
             return user;
         }
         catch(SQLException sqle){
@@ -109,7 +121,7 @@ public class Model{
     public String addUser(User user){
         String userName=user.getUserName();
         if(getUser(userName)!=null){
-            return "user exists";
+            return "username exists";
         }
         String[] data=user.getData();
         try(Connection conn=getConnection();){

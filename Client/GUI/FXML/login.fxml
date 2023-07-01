@@ -54,7 +54,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="logInButton" layoutX="142.0" layoutY="68.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="209.0" style="-fx-background-color: #08a0e9;" text="Log in" textFill="WHITE">
+            <Button fx:id="logInButton" layoutX="142.0" layoutY="68.0" mnemonicParsing="false" onAction="#logIn" prefHeight="58.0" prefWidth="209.0" style="-fx-background-color: #08a0e9;" text="Log in" textFill="WHITE">
                <font>
                   <Font size="35.0" />
                </font>
