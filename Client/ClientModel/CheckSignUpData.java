@@ -1,4 +1,4 @@
-package Client.ClientModel;
+package ClientModel;
 
 import java.util.HashMap;
 import java.util.Locale;
