@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="profileButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fx:id="profile" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextArea fx:id="text" editable="false" layoutX="14.0" layoutY="138.0" prefHeight="247.0" prefWidth="467.0" text="test">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextArea>
+      <ImageView fx:id="picture" fitHeight="150.0" fitWidth="467.0" layoutX="63.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Untitled-1.png" />
+         </image>
+      </ImageView>
+      <Line endX="367.0" layoutX="115.0" layoutY="535.0" startX="-100.0" />
+      <Button fx:id="retweet" layoutX="151.0" layoutY="548.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@reply-tweesst-retweet-like-share-260nw-2010826499%20copy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="comment" layoutX="30.0" layoutY="547.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@reply-tweet-re-share-260nw-2010826499%20copy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="406.0" layoutY="547.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@replssssy-tweet-retweet-like-share-260nw-2010826499%20copy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="like" layoutX="284.0" layoutY="547.0" mnemonicParsing="false">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@replysss-tweet-retweet-like-share-260nw-2010826499%20copy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fx:id="commentNo" layoutX="83.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="retweetNo" layoutX="214.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="likeNo" layoutX="342.0" layoutY="575.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="name" editable="false" layoutX="168.0" layoutY="25.0" text="test test">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="date" editable="false" layoutX="169.0" layoutY="99.0" prefHeight="29.0" prefWidth="99.0" text="2022/02/09">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="username" editable="false" layoutX="169.0" layoutY="60.0" text="\@test">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+   </children>
+</Pane>
