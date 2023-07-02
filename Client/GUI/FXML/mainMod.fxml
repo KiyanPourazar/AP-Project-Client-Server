@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="493.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
+   <children>
+      <Button fx:id="myProfile" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="53.0">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@png-transparent-profile-logo-computer-icons-user-user-blue-heroes-logo.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="hashtagSearch" layoutX="92.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchHashTag">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@3031293%20ceeeopy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="search" layoutX="183.0" layoutY="13.0" mnemonicParsing="false" onAction="#searchUser">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@3031293.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="addTweet" layoutX="272.0" layoutY="14.0" mnemonicParsing="false" onAction="#addTweet">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@1060_icons_compose-tweet%20copy.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="blocks" layoutX="358.0" layoutY="100.0" mnemonicParsing="false" onAction="#showBlocks" prefHeight="25.0" prefWidth="70.0" />
+      <Button fx:id="following" layoutX="358.0" layoutY="54.0" mnemonicParsing="false" onAction="#showFollowing" prefHeight="25.0" prefWidth="70.0" />
+      <Button fx:id="followers" layoutX="358.0" layoutY="15.0" mnemonicParsing="false" onAction="#showFollowers" prefHeight="25.0" prefWidth="70.0" />
+      <Text layoutX="368.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Followers" />
+      <Text layoutX="367.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Following" />
+      <Text layoutX="376.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blocks" />
+      <Text fx:id="tweet1" layoutX="189.0" layoutY="116.0" onMouseClicked="#showtTweet1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet2" layoutX="17.0" layoutY="117.0" onMouseClicked="#showtTweet2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet3" layoutX="189.0" layoutY="153.0" onMouseClicked="#showtTweet3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet4" layoutX="17.0" layoutY="153.0" onMouseClicked="#showtTweet4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet5" layoutX="189.0" layoutY="193.0" onMouseClicked="#showtTweet5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet6" layoutX="17.0" layoutY="193.0" onMouseClicked="#showtTweet6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet7" layoutX="189.0" layoutY="228.0" onMouseClicked="#showtTweet7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet8" layoutX="17.0" layoutY="228.0" onMouseClicked="#showtTweet8" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet9" layoutX="189.0" layoutY="259.0" onMouseClicked="#showtTweet9" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+      <Text fx:id="tweet10" layoutX="17.0" layoutY="259.0" onMouseClicked="#showtTweet10" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="149.33333333333337" />
+   </children>
+</AnchorPane>

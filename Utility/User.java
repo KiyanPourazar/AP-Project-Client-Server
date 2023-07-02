@@ -1,6 +1,14 @@
 package Utility;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
+
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 
 public class User implements Serializable{
     private String userName;
@@ -16,8 +24,8 @@ public class User implements Serializable{
     private String webSiteAddress;
     private String signUpDate;
     private String lastModified;
-    private String avatarLocation;
-    private String headerLocation;
+    private byte[] avatar;
+    private byte[] header;
 
     public User(String userName, String phoneNumber, String country, String email, String passWord, String firstName, String lastName, String birthDate){
         this.userName=userName;
@@ -33,8 +41,12 @@ public class User implements Serializable{
         this.webSiteAddress=null;
         this.signUpDate=Time.getCurrentTime();
         this.lastModified=Time.getCurrentTime();
-        this.avatarLocation=null;
-        this.headerLocation=null;
+        this.avatar=null;
+        this.header=null;
+    }
+
+    public void setPassWord(String pass){
+        passWord=pass;
     }
 
     public void setBio(String bio){
@@ -52,15 +64,29 @@ public class User implements Serializable{
         setLastModified(Time.getCurrentTime());
     }
 
-    public void setAvatar(String avatarLocation){
-        this.avatarLocation=avatarLocation;
+    public void setAvatar(Image image){
+        this.avatar=Time.imageToByteArray(image);
         setLastModified(Time.getCurrentTime());
     }
     
-    public void setHeader(String headerLocation){
-        this.headerLocation=headerLocation;
+    public void setHeader(Image image){
+        this.header=Time.imageToByteArray(image);
         setLastModified(Time.getCurrentTime());
     }
+
+    // public byte[] imageToByteArray(String URL){
+    //     try {
+    //         File file=new File(URL);
+    //         byte [] data=Files.readAllBytes(file.toPath());
+    //         // BufferedImage bImage = ImageIO.read(new File(URL));
+    //         // ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    //         // ImageIO.write(bImage, "jpg", bos);
+    //         // byte [] data = bos.toByteArray();
+    //         return data;
+    //     } catch (IOException e) {
+    //         return null;
+    //     }
+    // }
 
     public void setSignUpDate(String date){
         signUpDate=date;
@@ -140,12 +166,47 @@ public class User implements Serializable{
         return lastModified;
     }
 
-    public String getAvatarLocation() {
-        return avatarLocation;
+    public byte[] getAvatarBytes(){
+        return avatar;
     }
 
-    public String getHeaderLocation() {
-        return headerLocation;
+    public Image getAvatar() {
+        if(avatar==null){
+            return null;
+        }
+        return byteArrayToImage(avatar);
+        // String URL=byteArrayToImage(avatar);
+        // Image image=new Image(URL);
+        // File f=new File(URL);
+        // f.delete();
+        // return image;
+    }
+
+    public byte[] getHeaderBytes(){
+        return header;
+    }
+
+    public Image getHeader() {
+        if(header==null){
+            return null;
+        }
+        return byteArrayToImage(header);
+        // String URL=byteArrayToImage(header);
+        // Image image=new Image(URL);
+        // File f=new File(URL);
+        // f.delete();
+        // return image;
+    }
+
+    public Image byteArrayToImage(byte[] data){
+        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+        try {
+            BufferedImage bufferedImage = ImageIO.read(bis);
+            return SwingFXUtils.toFXImage(bufferedImage, null);
+        } catch (IOException e) {
+            return null;
+        }
+        
     }
 }
 // TODO: Saving and loading images according to JavaFX

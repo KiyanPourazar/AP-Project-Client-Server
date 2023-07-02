@@ -7,14 +7,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-public class LoginController {
+public class LoginController{
+
+    private GeneralController gc=new GeneralController();
+
+    @FXML
+    private ImageView alphabetLogo;
+
+    @FXML
+    private ImageView birdLogo;
 
     @FXML
     private Button logInButton;
@@ -35,39 +42,34 @@ public class LoginController {
     void logIn(ActionEvent event) {
         String userName=username.getText();
         String passWord=password.getText();
+        if(userName==null || passWord==null){
+            gc.showResult("no empty fields allowed");
+            return;
+        }
         String order= userName+" | "+passWord;
         String result=ClientModel.login(order);
-        showResult(result);
+        gc.showResult(result);
+        if(result.equals("success")){
+            setScene(logInButton, "FXML/mainMod.fxml");
+        }
     }
 
     @FXML
     void signUp(ActionEvent event) {
-        setScene(signUpButton, "FXML\\signup.fxml");
+        gc.setScene(signUpButton, "FXML/signup.fxml");
     }
 
     public void setScene(Button button, String address){
-        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource(address));
+            FXMLLoader loader=new FXMLLoader(getClass().getResource(address));
+            Parent root = loader.load();
+            MainController mc=loader.getController();
+            mc.setUserName(username.getText());
             button.getScene().setRoot(root);
         } catch (IOException e) {
             System.exit(-1);
         }
     }
 
-    public void showResult(String result){
-        try {
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXML\\popup.fxml"));
-            Parent root = loader.load();
-            PopUpController popUpController = loader.getController();
-            popUpController.setResult(result);
-            Stage stage=new Stage();
-            stage.setTitle("Result");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
-    }
+    
 }

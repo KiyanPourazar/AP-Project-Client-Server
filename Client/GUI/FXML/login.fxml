@@ -27,7 +27,7 @@
    <children>
       <AnchorPane prefHeight="228.0" prefWidth="493.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="155.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="birdLogo" fitHeight="150.0" fitWidth="200.0" layoutX="155.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Logo_of_Twitter.svg.png" />
                </image>
@@ -69,7 +69,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="alphabetLogo" fitHeight="150.0" fitWidth="200.0" layoutX="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Twitter_logo.svg.png" />
                </image>

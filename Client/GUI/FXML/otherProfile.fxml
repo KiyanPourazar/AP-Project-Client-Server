@@ -90,7 +90,6 @@
          </font>
       </Text>
       <TextField fx:id="passWord" layoutX="227.0" layoutY="239.0" prefHeight="26.0" prefWidth="182.0" promptText="passWord" text="test" />
-      <Button fx:id="update" layoutX="146.0" layoutY="581.0" mnemonicParsing="false" onAction="#updateProfile" text="Update" />
       <Text fx:id="userName" layoutX="232.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="181.9999999999999" />
       <Text fx:id="lastName" layoutX="298.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="148.66668701171864" />
       <Text fx:id="firstName" layoutX="94.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="119.99999999999989" />
@@ -98,6 +97,8 @@
       <Text fx:id="phoneNumber" layoutX="94.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="322.9999999999999" />
       <Text fx:id="country" layoutX="94.0" layoutY="498.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="119.99999999999989" />
       <Text fx:id="birthDate" layoutX="95.0" layoutY="565.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="181.9999999999999" />
-      <Button fx:id="back" layoutX="246.0" layoutY="581.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="back" layoutX="271.0" layoutY="570.0" mnemonicParsing="false" onAction="#back" text="Back" />
+      <Button fx:id="block" layoutX="132.0" layoutY="570.0" mnemonicParsing="false" onAction="#blockUser" text="Block" />
+      <Button fx:id="follow" layoutX="205.0" layoutY="570.0" mnemonicParsing="false" onAction="#followUser" text="Follow" />
    </children>
 </Pane>

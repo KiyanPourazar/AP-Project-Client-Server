@@ -1,7 +1,9 @@
 package Model;
 
+import Utility.Time;
 import Utility.Tweet;
 import Utility.User;
+import javafx.scene.image.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -81,8 +83,13 @@ public class Model{
             user.setLocation(data[9]);
             user.setWebSiteAddress(data[10]);
             user.setSignUpDate(data[11]);
+            // String avatarLocation=resultSet.getString(14);
+            // String headerLocation=resultSet.getString(15);
+            // Image avatar=Time.loadImageFromFile(avatarLocation);
+            // Image header=Time.loadImageFromFile(headerLocation);
+            // user.setAvatar(avatar);
+            // user.setHeader(header);
             user.setLastModified(data[12]);
-            // TODO: Profile image
             return user;
         }
         catch(SQLException sqle){
@@ -91,23 +98,26 @@ public class Model{
         }
     }
 
-    public void checkUpdateUser(){
-        // TODO: check updated data
-    }
-
     public String updateUser(User user){
         try(Connection conn=getConnection();){
             String sql="update users  "
             +"set passWord=?, bio=?, location=?, webSiteAddress=?, lastModified=?, AvatarLocation=?, HeaderLocation=? where userName=?";
-            // TODO: Save images properly
             PreparedStatement preparedStatement=conn.prepareStatement(sql);
             preparedStatement.setString(1, user.getPassWord());
             preparedStatement.setString(2, user.getBio());
             preparedStatement.setString(3, user.getLocation());
             preparedStatement.setString(4, user.getWebSiteAddress());
             preparedStatement.setString(5, user.getLastModified());
-            preparedStatement.setString(6, user.getAvatarLocation());
-            preparedStatement.setString(7, user.getHeaderLocation());
+            // byte[] avatar=user.getAvatarBytes();
+            // byte[] header=user.getHeaderBytes();
+            // String directory="E:\\VSCodes\\AP Project Server\\Server Data\\"+user.getUserName();
+            // String avatarLocation=Time.saveByteArray(avatar, directory, user.getUserName()+"_avatar");
+            // String headerLocation=Time.saveByteArray(header, directory, user.getUserName()+"_header");
+            // if(avatarLocation==null || headerLocation==null){
+            //     return "failure";
+            // }
+            preparedStatement.setString(6, null);
+            preparedStatement.setString(7, null);
             preparedStatement.setString(8, user.getUserName());
             preparedStatement.executeUpdate();
             return "success";
@@ -131,17 +141,33 @@ public class Model{
             for(int i=1; i<=13; i++){
                 preparedStatement.setString (i, data[i-1]);
             }
-            // TODO: Change these lines according to JavaFX
-            preparedStatement.setString (14, user.getAvatarLocation());
-            preparedStatement.setString (15, user.getHeaderLocation());
+            preparedStatement.setString (14, null);
+            preparedStatement.setString (15, null);
             preparedStatement.executeUpdate();
             return "success";
         }
         catch(SQLException sqle){
-            System.out.println(sqle.getMessage());
-            return "failure";
+            return sqle.getMessage();
         }
     }
+
+    // public String saveImageToFile(byte[] image, String userName, String savedFileName){
+    //     try {
+    //         Files.createDirectories(Paths.get("E:\\VSCodes\\AP Project Server\\Server Data\\"+userName));
+    //         String location="E:\\VSCodes\\AP Project Server\\Server Data\\"+savedFileName+".jpg";
+    //         File file=new File(location);
+    //         file.createNewFile();
+    //         Files.write(file.toPath(), image);
+            
+    //         // File outputFile = new File(location);
+    //         // BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+    //         // ImageIO.write(bImage, "jpg", outputFile);
+    //         return location;
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //         return null;
+    //     }
+    // }
 
     public String follow(String follower, String followed){
         try(Connection conn=getConnection();){
@@ -186,6 +212,26 @@ public class Model{
             String result="";
             while(resultSet.next()){
                 result+=resultSet.getString("follower")+"\n";
+            }
+            return result;
+        }
+        catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+            return null;
+        }
+    }
+
+    public String getBlocks(String userName){
+        try(Connection conn=getConnection();){
+            String sql="select * from blocks "
+            + "where blocker=?";
+            PreparedStatement preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            ResultSet resultSet=preparedStatement.executeQuery();
+
+            String result="";
+            while(resultSet.next()){
+                result+=resultSet.getString("blocked")+"\n";
             }
             return result;
         }

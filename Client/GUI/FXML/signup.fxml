@@ -48,7 +48,12 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
          <children>
-            <Button fx:id="signUpButton" layoutX="142.0" layoutY="22.0" mnemonicParsing="false" onAction="#signUp" prefHeight="58.0" prefWidth="209.0" style="-fx-background-color: #08a0e9;" text="Sign up" textFill="WHITE">
+            <Button fx:id="signUpButton" layoutX="37.0" layoutY="17.0" mnemonicParsing="false" onAction="#signUp" prefHeight="58.0" prefWidth="209.0" style="-fx-background-color: #08a0e9;" text="Sign up" textFill="WHITE">
+               <font>
+                  <Font size="35.0" />
+               </font>
+            </Button>
+            <Button fx:id="backButton" layoutX="303.0" layoutY="17.0" mnemonicParsing="false" onAction="#goBack" prefHeight="75.0" prefWidth="122.0" style="-fx-background-color: #08a0e9;" text="Back" textFill="WHITE">
                <font>
                   <Font size="35.0" />
                </font>
