@@ -172,11 +172,15 @@ public class ProfileController{
 
     @FXML
     void blockUser(ActionEvent event) {
-
+        String order=userName.getText()+" | "+mainUser;
+        String result=ClientModel.block(order);
+        gc.showResult(result);
     }
 
     @FXML
     void followUser(ActionEvent event) {
-
+        String order=userName.getText()+" | "+mainUser;
+        String result=ClientModel.follow(order);
+        gc.showResult(result);
     }
 }

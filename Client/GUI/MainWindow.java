@@ -14,9 +14,9 @@ public class MainWindow extends Application{
     public void start(Stage stage) throws Exception{
         Parent root=FXMLLoader.load(getClass().getResource("FXML/login.fxml"));
         stage.setTitle("Twitter");
-        JFrame frame = new JFrame("Java Swing And JavaFX");  
-        JFXPanel jfxPanel = new JFXPanel();  
-        frame.add(jfxPanel);
+        // JFrame frame = new JFrame("Java Swing And JavaFX");  
+        // JFXPanel jfxPanel = new JFXPanel();  
+        // frame.add(jfxPanel);
         stage.setScene(new Scene(root));
         stage.show();
     }

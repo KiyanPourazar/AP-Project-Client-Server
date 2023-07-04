@@ -5,4 +5,7 @@ public class Client {
         mainWindow.run();
     }
 }
-
+// TODO: AddTweet
+// TODO: AddLike
+// TODO: ShowTweets(TimeLine)
+// TODO: Avatar, Header, Tweet Image(deal with byte[] only)

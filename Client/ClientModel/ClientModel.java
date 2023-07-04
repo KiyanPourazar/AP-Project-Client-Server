@@ -1,6 +1,7 @@
 package ClientModel;
 
 import Utility.DataObject;
+import Utility.Tweet;
 import Utility.User;
 
 public class ClientModel{
@@ -72,5 +73,47 @@ public class ClientModel{
         DataObject dataObject=new DataObject("show-following", userName);
         dataObject=DataManager.sendData(dataObject);
         return (String)dataObject.getObject();
+    }
+
+    public static String block(String order){
+        DataObject dataObject=new DataObject("block", order);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
+    }
+
+    public static String follow(String order){
+        DataObject dataObject=new DataObject("follow", order);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
+    }
+
+    public static String sendTweet(Tweet tweet){
+        DataObject dataObject=new DataObject("send-tweet", tweet);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
+    }
+
+    public static String like(String order){
+        DataObject dataObject=new DataObject("like", order);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
+    }
+
+    public static String addComment(Tweet tweet, int mainTweetId){
+        DataObject dataObject=new DataObject("comment | "+mainTweetId, tweet);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
+    }
+
+    public static String addQuote(Tweet tweet, int mainTweetId){
+        DataObject dataObject=new DataObject("quote | "+mainTweetId, tweet);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
+    }
+
+    public static String reTweet(Tweet tweet, int mainTweetId){
+        DataObject dataObject=new DataObject("retweet | "+mainTweetId, tweet);
+        dataObject=DataManager.sendData(dataObject);
+        return dataObject.getMethod();
     }
 }

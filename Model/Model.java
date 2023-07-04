@@ -14,28 +14,32 @@ import java.sql.SQLException;
 // TODO: special display for replies/quotes/retweets(maybe a tweet "kind" in database) FX
 // TODO: do sth about all the select *
 public class Model{
-    // public static void main(String[] args){
-    //     // Model model=new Model();
-    //     // User user=new User("mahKam", null, "IR", null, "123", null, null, null);
-    //     // User user2=new User("mahKam1", null, "IR", null, "123", null, null, null);
-    //     // Tweet tweet=new Tweet("mahKam", "hello", "greet");
-    //     // Tweet tweet2=new Tweet("mahKam", "bye", "greet");
-    //     // Tweet tweet3=new Tweet("mahKam1", "bye bye", "greet");
-    //     // model.addUser(user);
-    //     // model.addUser(user2);
-    //     // model.addTweet(tweet); 
-    //     // model.addTweet(tweet2);
-    //     // model.addTweet(tweet3);
-    //     // // model.follow("mahKam1", "mahKam");
-    //     // // model.follow("mahKam", "mahKam1");
-    //     // model.block("mahKam", "mahKam1");
-    //     // for(int i=1; i<=10; i++){
-    //     //     model.like("mahKam", tweet3.getId());
-    //     // }
-    //     // // model.unLike("mahKam1", tweet.getId());
-    //     // Tweet[] tweets=model.timeLine("mahKam");
-    //     // return;
-    // }
+    public static void main(String[] args){
+        Model model=new Model();
+        // User user=new User("mahKam", null, "IR", null, "123", null, null, null);
+        // User user2=new User("mahKam1", null, "IR", null, "123", null, null, null);
+        // Tweet tweet=new Tweet("mahKam", "hello", "greet");
+        // Tweet tweet2=new Tweet("mahKam", "bye", "greet");
+        // Tweet tweet3=new Tweet("mahKam1", "bye bye", "greet");
+        // Tweet tweet=new Tweet("mahKam", "this is a reply", "quote");
+        // model.addLike("mahKam", -2074208373);
+        // model.addUser(user);
+        // model.addUser(user2);
+        // model.addTweet(tweet); 
+        // model.addTweet(tweet2);
+        // model.addTweet(tweet3);
+        // model.follow("mahKam", "mahKam1");
+        // model.follow("mahKam", "mahKam1");
+        // model.block("mahKam", "mahKam1");
+        // for(int i=1; i<=9; i++){
+        //     model.addLike("mahKam", -2074208373);
+        // }
+        // // model.unLike("mahKam1", tweet.getId());
+        // Tweet[] tweets=model.timeLine("mahKam");
+        // model.addReply(tweet, -2074208373);
+        Tweet[] tweets=model.searchHashTag("greet");
+        return;
+    }
 
     public Connection getConnection(){
         try{
@@ -171,13 +175,33 @@ public class Model{
 
     public String follow(String follower, String followed){
         try(Connection conn=getConnection();){
+            String sql="select * from follows "
+            + "where follower=? and followed=?";
+            PreparedStatement preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString(1, follower);
+            preparedStatement.setString(2, followed);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(!resultSet.next()){
+                return addFollow(follower, followed);
+            } else{
+                return unfollow(follower, followed);
+            }
+        }
+        catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+            return "failure";
+        }
+    }
+
+    public String addFollow(String follower, String followed){
+        try(Connection conn=getConnection();){
             String sql="insert into follows "
             + "values (?, ?)";
             PreparedStatement preparedStatement=conn.prepareStatement(sql);
             preparedStatement.setString(1, follower);
             preparedStatement.setString(2, followed);
             preparedStatement.executeUpdate();
-            return "success";
+            return "user followed";
         }
         catch(SQLException sqle){
             System.out.println(sqle.getMessage());
@@ -193,7 +217,7 @@ public class Model{
             preparedStatement.setString(1, follower);
             preparedStatement.setString(2, followed);
             preparedStatement.executeUpdate();
-            return "success";
+            return "user unfollowed";
         }
         catch(SQLException sqle){
             System.out.println(sqle.getMessage());
@@ -263,6 +287,27 @@ public class Model{
 
     public String block(String blocker, String blocked){
         try(Connection conn=getConnection();){
+            String sql="select * from blocks "
+            + "where blocker=? and blocked=?";
+            PreparedStatement preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString(1, blocker);
+            preparedStatement.setString(2, blocked);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(!resultSet.next()){
+                return addBlock(blocker, blocked);
+            } else{
+                return unblock(blocker, blocked);
+            }
+        }
+        catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+            return "failure";
+        }
+    }
+
+    public String addBlock(String blocker, String blocked){
+        
+        try(Connection conn=getConnection();){
             String sql="insert into blocks "
             + "values (?, ?)";
             PreparedStatement preparedStatement=conn.prepareStatement(sql);
@@ -278,7 +323,7 @@ public class Model{
             preparedStatement.setString(1, blocked);
             preparedStatement.setString(2, blocker);
             preparedStatement.executeUpdate();
-            return "success";
+            return "user blocked";
         }
         catch(SQLException sqle){
             System.out.println(sqle.getMessage());
@@ -294,7 +339,7 @@ public class Model{
             preparedStatement.setString(1, blocker);
             preparedStatement.setString(2, blocked);
             preparedStatement.executeUpdate();
-            return "success";
+            return "user unblocked";
         }
         catch(SQLException sqle){
             System.out.println(sqle.getMessage());
@@ -473,6 +518,26 @@ public class Model{
 
     public String like(String userName, int tweetId){
         try(Connection conn=getConnection();){
+            String sql="select from likes "
+            + "where userName=? and tweetId=?";
+            PreparedStatement preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString (1, userName);
+            preparedStatement.setInt (2, tweetId);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(!resultSet.next()){
+                return addLike(userName, tweetId);
+            } else{
+                return unLike(userName, tweetId);
+            }
+        }
+        catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+            return "failure";
+        }
+    }    
+
+    public String addLike(String userName, int tweetId){
+        try(Connection conn=getConnection();){
             String sql="insert into likes "
             + "values (?, ?)";
             PreparedStatement preparedStatement=conn.prepareStatement(sql);
@@ -485,7 +550,7 @@ public class Model{
             preparedStatement.setInt(1, tweetId);
             preparedStatement.executeUpdate();
             checkFavstar(tweetId);
-            return "success";
+            return "tweet liked";
         }
         catch(SQLException sqle){
             System.out.println(sqle.getMessage());
@@ -507,7 +572,7 @@ public class Model{
             preparedStatement.setInt(1, tweetId);
             preparedStatement.executeUpdate();
             checkFavstar(tweetId);
-            return "success";
+            return "tweet unliked";
         }
         catch(SQLException sqle){
             System.out.println(sqle.getMessage());

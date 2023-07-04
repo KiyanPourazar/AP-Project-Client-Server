@@ -7,9 +7,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class MainController {
 
@@ -73,7 +75,17 @@ public class MainController {
 
     @FXML
     void addTweet(ActionEvent event) {
-
+        try {
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("FXML/sendTweet.fxml"));
+            Parent root = loader.load();
+            SendTweet pc=loader.getController();
+            pc.setUserName(userName);
+            Stage stage=new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.exit(-1);
+        }
     }
 
     @FXML

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Model",
+            "request": "launch",
+            "mainClass": "Model.Model",
+            "projectName": "AP Project Server_d6652c5b"
+        },
+        {
+            "type": "java",
             "name": "Client",
             "request": "launch",
             "mainClass": "GUI.Client",
